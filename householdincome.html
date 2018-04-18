@@ -1,0 +1,191 @@
+<html>
+<head>
+	
+<style>
+    #map-canvas { width:100%; height:400px; }
+    .layer-wizard-search-label { font-family: sans-serif };
+
+body {background-color: beige;}
+#nav, #nav ul
+{
+    background-color:#4CAF50;
+    color:#1f3d7a;
+    margin:0;
+    padding:0;
+    list-style:none;
+    text-align:center;
+    font-weight: bold;
+    margin-bottom: 10px;
+    width: 100%;
+    height:40px;
+}
+#nav li
+{
+    background-color:#4CAF50;
+    color:#1f3d7a;
+    float:left;
+    text-align:center;
+	padding: 5px;
+}
+#nav li a
+{
+    background-color:#F0F8FF;
+    display:block;
+    padding:20px;
+}
+#nav li a:link, #nav li a:visited
+{
+    background-color:#F0F8FF;
+    color:#1f3d7a;
+    display:block;
+    padding:10px;
+    text-decoration:none;
+	}
+#nav li a:hover
+{
+    background-color:#e6e6ff;
+    color:#000;
+}
+h1 {color: #4CAF50;}
+h3 {color: #4CAF50;}
+</style>
+  <script type="text/javascript"
+    src="http://maps.google.com/maps/api/js?key=AIzaSyARMPcn9xigbHUtbcZAokkraKmltz86Djg">
+  </script>
+  <script type="text/javascript">
+    var map;
+    var layer_0;
+    function initialize() {
+      map = new google.maps.Map(document.getElementById('map-canvas'), {
+        center: new google.maps.LatLng(37.211238691017854, -85.90221756250003),
+        zoom: 4,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+      });
+      layer_0 = new google.maps.FusionTablesLayer({
+        query: {
+          select: "col0>>1",
+          from: "1D7LnFgHG98AtPUHm-bEN82XezgKENCwIWRGzRuyz"
+        },
+        map: map,
+        styleId: 2,
+        templateId: 2
+      });
+    }
+	    function changeMap_0() {
+      var whereClause;
+      var searchString = document.getElementById('search-string_0').value.replace(/'/g, "\\'");
+      if (searchString != '--Select--') {
+        whereClause = "'State' = '" + searchString + "'";
+      }
+      layer_0.setOptions({
+        query: {
+          select: "col0>>1",
+          from: "1D7LnFgHG98AtPUHm-bEN82XezgKENCwIWRGzRuyz",
+          where: whereClause
+        }
+      });
+    }
+
+	
+    google.maps.event.addDomListener(window, 'load', initialize);
+  </script>
+</head>
+<body>
+<ul id="nav">
+            <li><a href="index.html" title="">Home</a></li>
+            <li><a href="householdincome.html" title="">Household Income in the US</a></li>
+            <li><a href="poverty.html" title="">Poverty in the US</a></li>
+			<li><a href="comparison.html" title="">Comparison of Household Income and Poverty</a></li>
+			
+</ul>
+<br>
+<br>
+<center>
+
+<h1>Average Household Income by State in the US</h1>
+<br>
+<h3>Click on a state to find the average household income</h3>
+<br>
+<div id="map-canvas"></div>
+ <br>
+ <h1>Query the Map</h1>
+ <br>
+   <div style="margin-top: 10px;">
+      <label class="layer-wizard-search-label">
+        Choose State:
+        <select id="search-string_0" onchange="changeMap_0(this.value);">
+          <option value="--Select--">--Select--</option>
+          <option value="Alabama">Alabama</option>
+          <option value="Alaska">Alaska</option>
+          <option value="Arizona">Arizona</option>
+          <option value="Arkansas">Arkansas</option>
+          <option value="California">California</option>
+          <option value="Colorado">Colorado</option>
+          <option value="Connecticut">Connecticut</option>
+          <option value="Delaware">Delaware</option>
+          <option value="Florida">Florida</option>
+          <option value="Georgia">Georgia</option>
+          <option value="Hawaii">Hawaii</option>
+          <option value="Idaho">Idaho</option>
+          <option value="Illinois">Illinois</option>
+          <option value="Indiana">Indiana</option>
+          <option value="Iowa">Iowa</option>
+          <option value="Kansas">Kansas</option>
+          <option value="Kentucky">Kentucky</option>
+          <option value="Louisiana">Louisiana</option>
+          <option value="Maine">Maine</option>
+          <option value="Maryland">Maryland</option>
+          <option value="Massachusetts">Massachusetts</option>
+          <option value="Michigan">Michigan</option>
+          <option value="Minnesota">Minnesota</option>
+          <option value="Mississippi">Mississippi</option>
+          <option value="Missouri">Missouri</option>
+          <option value="Montana">Montana</option>
+          <option value="Nebraska">Nebraska</option>
+          <option value="Nevada">Nevada</option>
+          <option value="New Hampshire">New Hampshire</option>
+          <option value="New Jersey">New Jersey</option>
+          <option value="New Mexico">New Mexico</option>
+          <option value="New York">New York</option>
+          <option value="North Carolina">North Carolina</option>
+          <option value="North Dakota">North Dakota</option>
+          <option value="Ohio">Ohio</option>
+          <option value="Oklahoma">Oklahoma</option>
+          <option value="Oregon">Oregon</option>
+          <option value="Pennsylvania">Pennsylvania</option>
+          <option value="Rhode Island">Rhode Island</option>
+          <option value="South Carolina">South Carolina</option>
+          <option value="South Dakota">South Dakota</option>
+          <option value="Tennessee">Tennessee</option>
+          <option value="Texas">Texas</option>
+          <option value="Utah">Utah</option>
+          <option value="Vermont">Vermont</option>
+          <option value="Virginia">Virginia</option>
+          <option value="Washington">Washington</option>
+          <option value="West Virginia">West Virginia</option>
+          <option value="Wisconsin">Wisconsin</option>
+          <option value="Wyoming">Wyoming</option>
+        </select>
+      </label> 
+    </div>
+    <br>
+	<h1>Analysing the Household Income with R Programming</h1>
+	<h3>Using R Programming, we calculated the mean household income and the standard deviation.</h3>
+	<img src="income1.png">
+	<br>
+	<br>
+	<img src="income2.png">
+		<br>
+	<br>
+	<h3>As you can see the average household income in the US was $50975 and the standard deviation was $8765.</h3>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+ 
+</center>
+</body>
+</html>
